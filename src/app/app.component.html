@@ -1,10 +1,11 @@
-<ng-container
-  *ngIf="isUsernameSet; then userSet; else userNotSet">
-</ng-container>
-
+<div class="app-container">
+  <ng-container
+    *ngIf="isUsernameSet; then userSet; else userNotSet">
+  </ng-container>
+</div>
 <ng-template #userNotSet>
 
-<div>
+<div class="username-input">
   Username:
   <input type="text" [(ngModel)]="user">
   <button (click)="start()">Start</button>
@@ -15,8 +16,11 @@
 <ng-template #userSet>
 
 <div class="chat-container">
-  <div *ngFor="let message of receivedMessages" class="message-box" [class.my-message]="message.user === user" [class.friend-messsage]="message.user !== user">
-    <p>{{message.content}}<br><span>{{message.user}} um {{formatDate(message.date)}}</span></p>
+  <div *ngFor="let message of receivedMessages" class="message-box">
+    <div [class.my-message]="message.user === user" [class.friend-message]="message.user !== user">
+      <p class="content">{{message.content}}<br></p>
+      <span [class.my-time]="message.user === user" [class.friend-time]="message.user !== user">{{message.user}} um {{formatDate(message.date)}}</span>
+    </div>
   </div>
 
   <div class="chatbox-input">
